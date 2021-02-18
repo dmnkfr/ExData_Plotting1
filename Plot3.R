@@ -21,14 +21,14 @@ household$Date <- strptime(household$Date, "%e/%m/%Y")
 householdSub <- subset(household, household$Date > "2007-01-31" & household$Date < "2007-02-03")
 # remove original data set
 rm(household)
+# convert the date format
+datetime <- paste(as.Date(householdSub$Date), householdSub$Time)
+householdSub$Datetime <- as.POSIXct(datetime)
 # check new subset
 head(householdSub)
 ################################################################################
 ###                            Plotting part                                 ###
 ################################################################################
-# convert the date format
-datetime <- paste(as.Date(householdSub$Date), householdSub$Time)
-householdSub$Datetime <- as.POSIXct(datetime)
 # change device
 png('plot3.png', width = 480, height = 480)
 # plot to png
